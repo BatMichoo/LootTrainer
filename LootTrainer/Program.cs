@@ -60,8 +60,8 @@ namespace LootTrainer
             })
             .AddOAuth("Blizzard", options =>
             {
-                options.ClientId = "95b87664108f465098dd2be266138ba5";
-                options.ClientSecret = "Xk76OGmbHQg88Pt49H44V3vKOny3Ala3";
+                //options.ClientId = "";
+                //options.ClientSecret = "";
                 options.CallbackPath = new PathString("/login");
 
                 options.AuthorizationEndpoint = $"{Endpoints.Base.OAuth}authorize";

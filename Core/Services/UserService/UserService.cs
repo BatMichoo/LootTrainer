@@ -20,7 +20,5 @@ namespace Core.Services.UserService
             _mapper = mapper;
             _claimsPrincipal = httpContextAccessor.HttpContext.User;
         }
-
-
     }
 }

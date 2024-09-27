@@ -26,7 +26,8 @@ namespace Core.Repositories.BaseRepository
 
         public async Task DeleteById(int id)
         {
-            T? entity = await GetById(id);
+            T? entity = _dbSet
+                .FirstOrDefault(e => e.Id == id);
 
             if (entity != null)
             {
@@ -75,9 +76,7 @@ namespace Core.Repositories.BaseRepository
 
         public async Task Delete(T entity)
         {
-            _dbSet.Remove(entity);
-
-            await SaveChangesAsync();
+            await DeleteById(entity.Id);
         }
 
         internal virtual IQueryable<T> AddInclusions(IQueryable<T> query)

@@ -5,18 +5,39 @@ namespace Infrastructure.Models
 {
     public class GuildApplication : BaseEntity
     {
-        public string CharacterName { get; set; }
+        [Required]
+        [RegularExpression("^[A-Z][a-z'-]{1,11}$")]
+        public string CharacterName { get; set; } = null!;
+
+        [Required]
         public CharacterClass Class { get; set; }
-        public string Specialization { get; set; }
-        public string Profession { get; set; }
-        public string BattleNetId { get; set; }
-        public string DiscordId { get; set; }
+
+        [Required]
+        public string Specialization { get; set; } = null!;
+
+        [Required]
+        public string Profession { get; set; } = null!;
+
+        [Required]
+        public int BattleNetId { get; set; }
+
+        [Required]
+        public int DiscordId { get; set; }
+
+        [Required]
         public int RaidsPerWeek { get; set; }
+
+        [Required]
         public string RaidRoles { get; set; }
-        public byte[] CharacterScreenshot { get; set; }
-        public string WarcraftLogs { get; set; }
-        public string ApplyReason { get; set; }
-        public string AboutYou { get; set; }
+
+        public byte[]? CharacterScreenshot { get; set; }
+
+        [Required]
+        public Uri WarcraftLogs { get; set; } = null!;
+
+        public string? ApplyReason { get; set; }
+
+        public string? AboutYou { get; set; }
 
         [Required]
         [ForeignKey(nameof(Applicant))]

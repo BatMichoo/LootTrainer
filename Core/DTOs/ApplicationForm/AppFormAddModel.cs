@@ -8,8 +8,8 @@ namespace Core.DTOs.ApplicationForm
         public CharacterClass Class { get; set; }
         public string Specialization { get; set; }
         public string Profession { get; set; }
-        public string BattleNetId { get; set; }
-        public string DiscordId { get; set; }
+        public int BattleNetId { get; set; }
+        public int DiscordId { get; set; }
         public int RaidsPerWeek { get; set; }
         public string RaidRoles { get; set; }
         public byte[] CharacterScreenshot { get; set; }

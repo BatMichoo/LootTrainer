@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Core.DTOs.ApplicationForm;
 using Core.Services.AppFormService;
-using Core.Services.BattleNet;
+using Core.Utilities;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,19 +11,18 @@ namespace LootTrainer.Controllers
 {
     [Route("applications")]
     [Authorize(AuthenticationSchemes = "Blizzard")]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public class ApplicationController : BaseController
     {
         private readonly UserManager<BlizzUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IAppFormService _formService;
-        private readonly BattleNetService _bNetService;
 
-        public ApplicationController(UserManager<BlizzUser> userManager, IMapper mapper, IAppFormService formService, BattleNetService bNetService)
+        public ApplicationController(UserManager<BlizzUser> userManager, IMapper mapper, IAppFormService formService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _formService = formService;
-            _bNetService = bNetService;
         }
 
         [HttpGet("{id}")]
@@ -41,6 +40,16 @@ namespace LootTrainer.Controllers
             return _mapper.Map<AppFormViewModel>(application);
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<AppFormViewModel>> Get()
+        {
+            var applications = await _formService.GetAll();            
+
+            return _mapper.Map<AppFormViewModel>(applications);
+        }
+
         [HttpPost]
         public async Task<ActionResult<AppFormViewModel>> Create(AppFormAddViewModel? application)
         {
@@ -52,20 +61,14 @@ namespace LootTrainer.Controllers
             var applicationModel = _mapper.Map<AppFormAddModel>(application);
 
             var user = await _userManager.GetUserAsync(User);
+            int battleNetId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == Claims.BattleNetId)!.Value);
 
             applicationModel.ApplicantId = user.Id;
+            applicationModel.BattleNetId = battleNetId;
 
             var createdApp = await _formService.Create(applicationModel);
 
             return _mapper.Map<AppFormViewModel>(createdApp);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetProfile()
-        {
-            var userToken = User.Claims.FirstOrDefault(c => c.Type == "Token").Value;
-
-            return Ok(await _bNetService.Test(userToken));
-        }
+        }        
     }
 }

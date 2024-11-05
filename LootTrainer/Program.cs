@@ -30,10 +30,10 @@ namespace LootTrainer
 
             builder.Services.AddDbContext<LootDbContext>(opt =>
             {
-                opt.UseSqlServer(string.Format(builder.Configuration.GetConnectionString("LootingTrainer"), dbAccessCreds));
+                opt.UseSqlServer(string.Format(builder.Configuration.GetConnectionString("LootingTrainer")!, dbAccessCreds));
             })
             .AddIdentity<BlizzUser, IdentityRole>(opt =>
-             {
+            {
                 opt.SignIn.RequireConfirmedAccount = false;
                 opt.SignIn.RequireConfirmedEmail = false;
                 opt.User.RequireUniqueEmail = true;
@@ -42,7 +42,7 @@ namespace LootTrainer
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.Password.RequireUppercase = false;
                 opt.Password.RequireLowercase = false;
-             })
+            })
             .AddEntityFrameworkStores<LootDbContext>()
             .AddDefaultTokenProviders()
             .AddSignInManager<SignInManager<BlizzUser>>()
@@ -84,11 +84,11 @@ namespace LootTrainer
             });
 
             builder.Services.AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-                });
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            });
             
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

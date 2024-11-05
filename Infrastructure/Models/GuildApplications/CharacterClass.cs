@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Models
+﻿namespace Infrastructure.Models.GuildApplications
 {
     public enum CharacterClass
     {

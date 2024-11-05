@@ -2,7 +2,7 @@
 using Core.BaseService;
 using Core.DTOs.ApplicationForm;
 using Core.Repositories.GuildApplicationRepo;
-using Infrastructure.Models;
+using Infrastructure.Models.GuildApplications;
 
 namespace Core.Services.AppFormService
 {

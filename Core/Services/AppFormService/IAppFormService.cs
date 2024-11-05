@@ -1,6 +1,6 @@
 ﻿using Core.BaseService;
 using Core.DTOs.ApplicationForm;
-using Infrastructure.Models;
+using Infrastructure.Models.GuildApplications;
 
 namespace Core.Services.AppFormService
 {

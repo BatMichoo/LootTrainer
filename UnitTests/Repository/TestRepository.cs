@@ -1,6 +1,6 @@
 ﻿using Core.Repositories.BaseRepository;
 using Infrastructure;
-using Infrastructure.Models;
+using Infrastructure.Models.GuildApplications;
 
 namespace UnitTests.Repository
 {

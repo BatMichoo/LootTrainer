@@ -42,7 +42,6 @@ namespace LootTrainer.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<AppFormViewModel>> Get()
         {
             var applications = await _formService.GetAll();            
@@ -51,6 +50,7 @@ namespace LootTrainer.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<AppFormViewModel>> Create(AppFormAddViewModel? application)
         {
             if (application == null)

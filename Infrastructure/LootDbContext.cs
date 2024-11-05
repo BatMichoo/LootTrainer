@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Models;
+using Infrastructure.Models.GuildApplications;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

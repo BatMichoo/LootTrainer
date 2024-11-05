@@ -1,5 +1,5 @@
 ﻿using Infrastructure;
-using Infrastructure.Models;
+using Infrastructure.Models.GuildApplications;
 using Microsoft.EntityFrameworkCore;
 
 namespace UnitTests.Repository

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Infrastructure.Models
+namespace Infrastructure.Models.GuildApplications
 {
     public class GuildApplication : BaseEntity
     {
@@ -18,8 +18,7 @@ namespace Infrastructure.Models
         [Required]
         public string Profession { get; set; } = null!;
 
-        [Required]
-        public int BattleNetId { get; set; }
+        public int? BattleNetId { get; set; }
 
         [Required]
         public int DiscordId { get; set; }
@@ -28,7 +27,7 @@ namespace Infrastructure.Models
         public int RaidsPerWeek { get; set; }
 
         [Required]
-        public string RaidRoles { get; set; }
+        public string RaidRoles { get; set; } = null!;
 
         public byte[]? CharacterScreenshot { get; set; }
 
@@ -43,5 +42,8 @@ namespace Infrastructure.Models
         [ForeignKey(nameof(Applicant))]
         public string ApplicantId { get; set; } = null!;
         public BlizzUser Applicant { get; set; } = null!;
+
+        [Required]
+        public ApplicationState State { get; set; }
     }
 }

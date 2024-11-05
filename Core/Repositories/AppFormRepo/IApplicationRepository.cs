@@ -1,5 +1,5 @@
 ﻿using Core.Repositories.BaseRepository;
-using Infrastructure.Models;
+using Infrastructure.Models.GuildApplications;
 
 namespace Core.Repositories.GuildApplicationRepo
 {
